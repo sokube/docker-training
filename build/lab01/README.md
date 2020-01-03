@@ -1,4 +1,4 @@
-# LAB 1
+# LAB 01
 
 1. Create a Dockerfile
     * create a Dockerfile using the base nginx:alpine
