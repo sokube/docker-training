@@ -7,12 +7,18 @@ LABEL game=2048
 
 RUN set -x && \
     # add nginx
-    apk --update add nginx && \
-    mkdir /run/nginx
+    apk --no-cache add nginx=1.14.2-r4 && \
+    mkdir /run/nginx && \
+    chown -R nginx /var/lib/nginx/logs && \
+    chown -R nginx /var/log/nginx && \
+    chown -R nginx /run/nginx
 
-COPY default.conf /etc/nginx/conf.d/default.conf
-COPY 2048 /usr/share/nginx/html
+COPY --chown=nginx nginx.conf /etc/nginx/nginx.conf
+COPY --chown=nginx default.conf /etc/nginx/conf.d/default.conf
+COPY --chown=nginx 2048 /usr/share/nginx/html
 
 EXPOSE 80
+
+USER nginx
 
 CMD ["nginx", "-g", "daemon off;"]
