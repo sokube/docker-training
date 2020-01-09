@@ -1,4 +1,4 @@
-# LAB 02
+# LAB 03
 
 2048 game based on gabrielecirulli/2048: https://github.com/gabrielecirulli/2048
 

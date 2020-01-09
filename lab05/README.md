@@ -1,4 +1,4 @@
-# LAB 04
+# LAB 05
 
 * analyse the docker-compose file
 * start the docker-compose in background and check the logs

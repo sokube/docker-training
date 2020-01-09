@@ -1,4 +1,4 @@
-# LAB 03
+# LAB 04
 
 ## Quarkus & Graalvm
 This lab is based on Quarkus: https://quarkus.io/
