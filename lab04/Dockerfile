@@ -26,8 +26,8 @@ RUN gu install native-image && \
 # FROM alpine
 # FROM gcr.io/distroless/base
 FROM scratch
-WORKDIR /work/
-COPY --from=native-image /dist /work
+COPY --chown=1000 --from=native-image /dist /work
 EXPOSE 8080
-# USER 1000
-CMD ["./application", "-Dquarkus.http.host=0.0.0.0"]
+USER 1000
+WORKDIR /work/
+CMD ["./application", "-Dquarkus.http.host=0.0.0.0", "-Djava.io.tmpdir=/work/tmp"]

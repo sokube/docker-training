@@ -3,7 +3,7 @@
 .classpath
 .settings/
 bin/
-
+tools/
 # IntelliJ
 .idea
 *.ipr
