@@ -1,33 +1,24 @@
-####
-# This Dockerfile is used in order to build a container that runs the Quarkus application in native (no JVM) mode
-####
+# https://hub.docker.com/_/alpine/
+# FROM alpine:3.9
+FROM alpine@sha256:7746df395af22f04212cd25a92c1d6dbc5a06a0ca9579a229ef43008d4d1302a
 
-FROM maven:3.6.3-jdk-8 as mavencache
-ENV MAVEN_OPTS=-Dmaven.repo.local=/mvn
-COPY pom.xml /app/
-WORKDIR /app
-RUN mvn test-compile dependency:resolve dependency:resolve-plugins
+LABEL maintainer="sokube@sokube.ch"
+LABEL game=2048
 
-FROM oracle/graalvm-ce:19.2.1 AS native-image
-ENV MAVEN_OPTS=-Dmaven.repo.local=/mvn
-COPY --from=mavencache /mvn/ /mvn/
-COPY . /app
-WORKDIR /app
-# Build native image
-ENV GRAALVM_HOME=/usr
-RUN gu install native-image && \
-    ./mvnw package -Pnative -Dmaven.test.skip=true && \
-    # Prepare everything for final image
-    mkdir -p /dist && \
-    cp /app/target/*-runner /dist/application && \
-    chmod -R 775 /dist
+RUN set -x && \
+    # add nginx
+    apk --no-cache add nginx=1.14.2-r4 && \
+    mkdir /run/nginx && \
+    chown -R nginx /var/lib/nginx/logs && \
+    chown -R nginx /var/log/nginx && \
+    chown -R nginx /run/nginx
 
-# FROM centos
-# FROM alpine
-# FROM gcr.io/distroless/base
-FROM scratch
-WORKDIR /work/
-COPY --from=native-image /dist /work
-EXPOSE 8080
-# USER 1000
-CMD ["./application", "-Dquarkus.http.host=0.0.0.0"]
+COPY --chown=nginx nginx.conf /etc/nginx/nginx.conf
+COPY --chown=nginx default.conf /etc/nginx/conf.d/default.conf
+COPY --chown=nginx 2048 /usr/share/nginx/html
+
+EXPOSE 80
+
+USER nginx
+
+CMD ["nginx", "-g", "daemon off;"]

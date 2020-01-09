@@ -1,9 +1,11 @@
 # comment
 # see doc: https://docs.docker.com/engine/reference/builder/#dockerignore-file
+*/temp*
+*/*/temp*
+temp?
 
 Dockerfile
 .dockerignore
-README.*
 
 # Lines starting with ! (exclamation mark) can be used to make exceptions to exclusions.
 # *.md
