@@ -17,7 +17,7 @@ COPY --chown=nginx nginx.conf /etc/nginx/nginx.conf
 COPY --chown=nginx default.conf /etc/nginx/conf.d/default.conf
 COPY --chown=nginx 2048 /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 8080
 
 USER nginx
 
