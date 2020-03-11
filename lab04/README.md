@@ -20,5 +20,5 @@ Under the hood, this demo uses:
 
 * Analyse the Dockerfile and other files
 * Build an image based on this Dockerfile 
-* Run this image and test it
+* Run this image and test it (http://localhost:8888/hello/greeting/coucou)
 * try to exec a command inside the container

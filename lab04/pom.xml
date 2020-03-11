@@ -7,7 +7,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <quarkus.version>1.0.1.Final</quarkus.version>
+        <quarkus.version>1.2.1.Final</quarkus.version>
         <compiler-plugin.version>3.8.1</compiler-plugin.version>
         <surefire-plugin.version>2.22.1</surefire-plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -97,7 +97,6 @@
                                 </goals>
                                 <configuration>
                                     <!-- see https://github.com/quarkusio/quarkus/blob/master/devtools/maven/src/main/java/io/quarkus/maven/NativeImageMojo.java -->
-                                    <!-- <enableJni>true</enableJni> -->
                                     <additionalBuildArgs>
                                         <additionalBuildArg>--static</additionalBuildArg>
                                     </additionalBuildArgs>
